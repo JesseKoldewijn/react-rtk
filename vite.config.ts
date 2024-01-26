@@ -1,8 +1,8 @@
+import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
-import solid from "vite-plugin-solid";
 
 export default defineConfig({
-  plugins: [solid()],
+  plugins: [react()],
   resolve: {
     alias: {
       "~": "/src",

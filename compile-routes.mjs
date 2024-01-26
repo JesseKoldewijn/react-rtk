@@ -24,7 +24,7 @@ const compile = async () => {
   const routesArray = Array.from(routesSet);
 
   const routesFileContent = `
-        import { lazy } from "solid-js";
+        import { lazy } from "react";
 
         const fileRoutes = [${routesArray.toString()}];
 

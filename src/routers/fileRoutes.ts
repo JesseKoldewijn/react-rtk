@@ -1,4 +1,4 @@
-import { lazy } from "solid-js";
+import { lazy } from "react";
 
 const fileRoutes = [
   {

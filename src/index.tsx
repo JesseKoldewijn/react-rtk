@@ -1,22 +1,54 @@
-/* @refresh reload */
-import { Route, Router } from "@solidjs/router";
-import { Suspense } from "solid-js";
-import { render } from "solid-js/web";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "~/styles/tailwind.css";
 
 import fileRoutes from "./routers/fileRoutes";
 
 const App = () => {
   return (
-    <div class="fixed inset-0 min-h-screen w-full overflow-auto font-sans">
-      <Router root={(props) => <Suspense>{props.children}</Suspense>}>
-        {fileRoutes.flatMap((r) => {
-          return <Route path={r.pathname} component={r.component} />;
-        })}
-      </Router>
+    <div className="fixed inset-0 min-h-screen w-full overflow-auto font-sans">
+      <BrowserRouter basename="/" future={{ v7_startTransition: true }}>
+        <Routes>
+          {fileRoutes.flatMap((r) => {
+            switch (r.pathname) {
+              case "/":
+                return (
+                  <Route
+                    key={r.pathname}
+                    path={r.pathname}
+                    element={<r.component />}
+                  />
+                );
+              case "/*404":
+                return (
+                  <Route
+                    key={r.pathname}
+                    path={"*"}
+                    element={<r.component />}
+                  />
+                );
+              default:
+                return (
+                  <Route
+                    key={r.pathname}
+                    path={r.pathname}
+                    element={<r.component />}
+                  />
+                );
+            }
+          })}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
 
-const root = document.getElementById("root");
-render(() => <App />, root!);
+const rootElem = document.getElementById("root");
+
+if (rootElem) {
+  const isHydrated = rootElem.hasChildNodes();
+  if (!isHydrated) {
+    const root = createRoot(rootElem);
+    root.render(<App />);
+  }
+}
