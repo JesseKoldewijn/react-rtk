@@ -8,7 +8,7 @@ import fileRoutes from "./routers/fileRoutes";
 
 const App = () => {
   return (
-    <div>
+    <div class="fixed inset-0 min-h-screen w-full overflow-auto font-sans">
       <Router root={(props) => <Suspense>{props.children}</Suspense>}>
         {fileRoutes.flatMap((r) => {
           return <Route path={r.pathname} component={r.component} />;
