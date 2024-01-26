@@ -6,6 +6,10 @@ const fileRoutes = [
     component: lazy(() => import("../pages/*404")),
   },
   {
+    pathname: "/about" as const,
+    component: lazy(() => import("../pages/about")),
+  },
+  {
     pathname: "/" as const,
     component: lazy(() => import("../pages/index")),
   },

@@ -1,5 +1,5 @@
-import { LinkProps, Link as RrdLink } from "react-router-dom";
-import { PathName } from "~/types/fileRoutesType";
+import { type LinkProps, Link as RrdLink } from "react-router-dom";
+import { type PathName } from "~/types/fileRoutesType";
 import { cn } from "~/utils/cn";
 
 type _LinkProps = Omit<LinkProps, "to"> &
@@ -8,12 +8,17 @@ type _LinkProps = Omit<LinkProps, "to"> &
     children?: React.ReactNode;
   };
 
+const linkStyles = cn(
+  "decoration-none rounded border px-3 py-2 hover:bg-neutral-200 hover:text-neutral-950",
+);
+
 export const Link = ({ href, className, children, ...rest }: _LinkProps) => {
   return (
     <RrdLink
       to={href}
-      className={cn(className, "decoration-none rounded border px-3 py-2")}
+      className={cn(className, linkStyles)}
       {...rest}
+      unstable_viewTransition
     >
       {children}
     </RrdLink>
@@ -38,12 +43,14 @@ export const ExternalLink = ({
     }
     return href.href;
   };
+  const actualHref = hrefParse(href);
 
   return (
     <RrdLink
-      to={hrefParse(href)}
-      className={cn(className, "decoration-none rounded border px-3 py-2")}
+      to={hrefParse(actualHref)}
+      className={cn(className, linkStyles)}
       {...rest}
+      unstable_viewTransition={actualHref.startsWith("/")}
     >
       {children}
     </RrdLink>
