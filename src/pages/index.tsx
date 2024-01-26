@@ -1,15 +1,30 @@
 import { ExternalLink } from "~/components/navigation/link";
+import { clientVisitsStore } from "~/stores/clientVisits/store";
 
 const Home = () => {
+  const { clientVisits } = clientVisitsStore.getState();
+
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-14">
-      <section className="mx-4 flex flex-col items-center justify-center text-center md:mx-auto">
-        <h1 className="text-xl font-bold md:text-3xl">Welcome to ReactRTK</h1>
-        <p className="max-w-md text-sm md:text-lg">
-          In this project I'll be using ReactJS, TailwindCSS and Vite to
-          experiment with Redux and RTK.
-        </p>
-      </section>
+      {clientVisits.value > 0 ? (
+        <section className="mx-4 flex flex-col items-center justify-center text-center md:mx-auto">
+          <h1 className="text-xl font-bold md:text-3xl">
+            Welcome back to ReactRTK!
+          </h1>
+          <p className="max-w-md text-sm md:text-lg">
+            As a recap about this project. In this project I'll be using
+            ReactJS, TailwindCSS and Vite to experiment with Redux and RTK.
+          </p>
+        </section>
+      ) : (
+        <section className="mx-4 flex flex-col items-center justify-center text-center md:mx-auto">
+          <h1 className="text-xl font-bold md:text-3xl">Welcome to ReactRTK</h1>
+          <p className="max-w-md text-sm md:text-lg">
+            In this project I'll be using ReactJS, TailwindCSS and Vite to
+            experiment with Redux and RTK.
+          </p>
+        </section>
+      )}
       <section className="mx-4 flex flex-col items-center justify-center text-center md:mx-auto">
         <h1 className="text-xl font-semibold md:text-2xl">
           Want to check the source-code?
