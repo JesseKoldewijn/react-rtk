@@ -1,0 +1,37 @@
+{
+  "name": "simple-solid-spa",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n vite,routes-compile -c blue,green \"npm:dev:vite\" \"npm:compile:routes:watch\"",
+    "dev:vite": "vite",
+    "build": "node ./compile-routes.mjs && tsc && vite build",
+    "preview": "vite preview",
+    "compile:routes": "node ./compile-routes.mjs",
+    "compile:routes:watch": "node --watch ./compile-routes.mjs",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.10.10",
+    "solid-js": "^1.8.7"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "autoprefixer": "^10.4.17",
+    "concurrently": "^8.2.2",
+    "cssnano": "^6.0.3",
+    "cssnano-preset-advanced": "^6.0.3",
+    "postcss": "^8.4.33",
+    "postcss-preset-env": "^9.3.0",
+    "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vite-plugin-solid": "^2.8.0"
+  },
+  "volta": {
+    "node": "20.11.0"
+  }
+}
