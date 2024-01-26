@@ -28,11 +28,13 @@ const App = () => {
                   />
                 );
               default:
+                const fallback = r as any;
+
                 return (
                   <Route
-                    key={r.pathname}
-                    path={r.pathname}
-                    element={<r.component />}
+                    key={fallback.pathname as any}
+                    path={fallback.pathname as any}
+                    element={<fallback.component />}
                   />
                 );
             }

@@ -16,7 +16,7 @@ const compile = async () => {
     const pathName = routeName === "index" ? "/" : `/${routeName}`;
 
     routesSet.add(`{
-            pathname: "${pathName}",
+            pathname: "${pathName}" as const,
             component: lazy(() => import("../pages/${routeName}")),
         }`);
   }
